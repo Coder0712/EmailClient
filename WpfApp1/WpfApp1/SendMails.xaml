@@ -1,0 +1,210 @@
+﻿<Window
+    x:Class="WpfApp1.SendMails"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:WpfApp1"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Mail senden"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+
+    <!--
+        Darauf wird die Datenbindung bezogen
+        Dadurch im Code Behind nicht mehr notwendig:
+        DataContext = new xxxViewModel
+    -->
+    <Window.DataContext>
+        <local:SendMailViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1.5*" />
+            <RowDefinition Height="5*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="0.5*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="0.24*" />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="1"
+                Width="Auto"
+                Height="25"
+                Command="{Binding SendCommand}"
+                FontSize="14">
+                Senden
+            </Button>
+        </Grid>
+        <Grid Name="SenderGrid" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*" MaxWidth="100" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="0.2*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Name="SenderLabel"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="14">
+                Sender
+            </Label>
+
+            <TextBox
+                Name="SenderTbx"
+                Grid.Column="2"
+                Width="Auto"
+                Height="25"
+                Text="{Binding Sender}" />
+        </Grid>
+        <Grid Name="ReceiverGrid" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="0.2*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Name="EmpfängerLabel"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="14">
+                Empfänger
+            </Label>
+            <TextBox
+                Name="EmpfängerTbx"
+                Grid.Column="2"
+                Width="Auto"
+                Height="25"
+                Text="{Binding Receiver}" />
+        </Grid>
+        <Grid Name="SubjectGrid" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="0.2*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Name="SubjectLabel"
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="14">
+                Betreff
+            </Label>
+            <TextBox
+                Name="SubjectTbx"
+                Grid.Column="2"
+                Width="Auto"
+                Height="25"
+                Text="{Binding Subject}" />
+        </Grid>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.31*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="0.05*" />
+                <ColumnDefinition Width="0.3*" />
+                <ColumnDefinition Width="0.22*" />
+            </Grid.ColumnDefinitions>
+            <ListBox
+                Name="AttachmentList"
+                Grid.Column="2"
+                Width="Auto"
+                Height="Auto"
+                BorderThickness="0"
+                ItemsSource="{Binding AttachmentList}">
+                <!--<ListBoxItem Content="{Binding Path=Name}">
+                    <ListBoxItem.ContentTemplate>
+                        <DataTemplate>
+                            <Label Name="File" Content="{Binding}" />
+                        </DataTemplate>
+                    </ListBoxItem.ContentTemplate>
+                </ListBoxItem>-->
+
+                <!--<ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Path=Name}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>-->
+                <!--<ListBoxItem Content="{Binding Path=Name}">
+                    <ListBoxItem.ContentTemplate>
+                        <DataTemplate>
+                            <Label Name="File" Content="{Binding}" />
+                        </DataTemplate>
+                    </ListBoxItem.ContentTemplate>
+                </ListBoxItem>-->
+
+
+
+
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:HandleFileName}">
+                        <Grid>
+                            <TextBlock Text="{Binding Path=FileName}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+
+            </ListBox>
+            <Label
+                Grid.Column="1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="14">
+                Anhang
+            </Label>
+            <Button
+                Name="AddAttachment"
+                Grid.Column="4"
+                Width="Auto"
+                Height="25"
+                Command="{Binding AddCommand}"
+                FontSize="14">
+                +
+            </Button>
+        </Grid>
+        <Grid Name="MessageGrid" Grid.Row="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.2*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="0.2*" />
+            </Grid.ColumnDefinitions>
+            <RichTextBox
+                Name="MessageRtb"
+                Grid.Column="2"
+                Width="Auto"
+                Height="Auto">
+                <RichTextBox.Document>
+                    <FlowDocument>
+                        <Paragraph>
+                            <Run Text="{Binding Message}" />
+                        </Paragraph>
+                    </FlowDocument>
+                </RichTextBox.Document>
+
+            </RichTextBox>
+        </Grid>
+    </Grid>
+</Window>
