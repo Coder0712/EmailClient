@@ -82,7 +82,8 @@
                 Grid.Column="1"
                 ItemsSource="{Binding Path=Mails}"
                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                ScrollViewer.VerticalScrollBarVisibility="Auto">
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectionChanged="MailsList_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown">
@@ -143,11 +144,10 @@
 
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="0.3*" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
                             <RowDefinition />
@@ -165,30 +165,30 @@
                             Name="SenderTB"
                             Grid.Row="0"
                             Grid.Column="1"
-                            Text="{Binding Path=Sender}" />
+                            Text="{Binding Path=Sender, UpdateSourceTrigger=PropertyChanged}" />
                         <TextBox
                             Name="EmpfängerTB"
                             Grid.Row="1"
                             Grid.Column="1"
-                            Text="{Binding Path=Receiver}" />
+                            Text="{Binding Path=Receiver, UpdateSourceTrigger=PropertyChanged}" />
                         <TextBox
                             Name="BetreffTB"
                             Grid.Row="2"
                             Grid.Column="1"
-                            Text="{Binding Path=Subject}" />
-                        <TextBox
-                            Name="mailText"
-                            Grid.Row="3"
-                            Grid.Column="1"
-                            Height="280"
-                            MinHeight="280"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Text="{Binding Path=MailText}" />
+                            Text="{Binding Path=Subject, UpdateSourceTrigger=PropertyChanged}" />
+
                     </Grid>
 
                 </StackPanel>
-
+                <TextBox
+                    Name="mailText"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Height="auto"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Text="{Binding Path=MailText, UpdateSourceTrigger=PropertyChanged}"
+                    VerticalScrollBarVisibility="Auto" />
             </Grid>
         </Grid>
 

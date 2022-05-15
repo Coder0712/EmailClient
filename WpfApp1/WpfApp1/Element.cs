@@ -19,14 +19,15 @@ namespace WpfApp1
         public string Date { get; set; }
         public string Message { get; set; }
 
-        private string Id { get; set; }
+        public string Id { get; set; }
         
-        public Element(string sender, string receiver, string subject, string date)
+        public Element(string id ,string sender, string receiver, string subject, string date)
         {
             Sender = sender ;
             Receiver = receiver;
             Subject = subject;
             Date = date;
+            Id = id;
         }
 
         public static List<Element> ReadData(List<string[]> strA_List)
@@ -67,7 +68,7 @@ namespace WpfApp1
 
                 }
 
-                e_List.Add(new Element(sender, receiver, subject, date));
+                e_List.Add(new Element(id,sender, receiver, subject, date));
                
             }
 
