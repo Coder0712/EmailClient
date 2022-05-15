@@ -5,6 +5,8 @@ Der Client wird stetig weiterentwickelt.
 
 E-Mails können täglich abgeholt werden
 
+E-Mails lassen sich öffnen. 
+
 E-Mails können empfangen werden und gesendet werden. 
 
 Die Nutzeroberfläche wurde mit WPF erstellt. 
@@ -27,7 +29,7 @@ Features, die noch hinzugefügt werden:
 
 Anhänge von empfangenen E-Mails werden gespeichert. 
 
-E-Mails lassen sich öffnen und der Inhalt wird angezeigt, zusammen mit dem Anhang. 
+Anhänge einer geöffneten E-Mail werden angezeigt. 
 
 Weitere Anpassungen für konsequente Umsetzung von MVVM. 
 
