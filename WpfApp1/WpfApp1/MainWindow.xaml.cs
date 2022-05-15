@@ -59,5 +59,10 @@ namespace WpfApp1
         {
             
         }
+
+        private void MailsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MainWindowViewModel.mainwindowviewmodel.ShowMail(sender);
+        }
     }
 }
